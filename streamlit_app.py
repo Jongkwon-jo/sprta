@@ -2,7 +2,10 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import time
-import xgboost
+import xgboost as xgb
+
+xgb_model = xgb.XGBRegressor()
+xgb_model.load_model('xgb_load_final2.model')
 
 st.title('Seoul House Price')
 st.header('Seoul House Price Prediction Project')
