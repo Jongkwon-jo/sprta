@@ -19,7 +19,7 @@ for i in range(100):
     bar.progress(i + 1)
     time.sleep(0.01)
     
-# 변수는 총 11개
+# 변수는 총 4개
 # 순서대로 전용면적, 계약년월, 거래금액, 층, 건축년도
 st.write("""
 ## 사용 변수들
@@ -44,3 +44,15 @@ st.write(contractdate.strftime("%Y%m"))
 
 floor = st.slider("층을 선택하세요", 1, 60)
 builtYear = st.slider("건축년도를 선택하세요(년도)", 1971, 2022)
+
+# scaling되기 전의 데이터
+realData = [[width, contract, floor, builtYear]]
+
+# minMaxScaler를 통해 scaling해줬었으므로 여기서도 해줘야함 scaling 된 데이터를 저장할 곳
+scaleData = []
+
+# scaling
+for i in range(0, len(realData)):
+    scaleData.append((realData[0][i] - mins[i]) / (maxs[i] - mins[i]))
+scaleData = [scaleData]
+res1 = xgb_model.predict(scaleData)
