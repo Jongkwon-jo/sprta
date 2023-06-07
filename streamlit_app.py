@@ -51,3 +51,21 @@ for i in range(0, len(realData)):
     scaleData.append((realData[0][i] - mins[i]) / (maxs[i] - mins[i]))
 scaleData = [scaleData]
 res1 = xgb_model.predict(scaleData)
+
+def krw_to_korean_won(arg):
+    amount = arg.replace(',', '')
+    if int(amount) > 99999999:
+        # print amount[0:-8],'억',amount[-8:-4],'만',amount[-4:], '원'
+        return '{0}억 {1}만 {2}원'.format(amount[0:-8], amount[-8:-4], amount[-4:])
+    elif int(amount) > 9999:
+        # print amount[-8:-4],'만',amount[-4:], '원'
+        return '{0}만 {1}원'.format(amount[-8:-4], amount[-4:])
+    else:
+        # print amount[-4:],'원'
+        return '{0}원'.format(amount[-4:])
+    
+result = round(res1[0] * 10000, -1)
+result = int(result)
+strresult = str(result)
+strresult = krw_to_korean_won(strresult)
+st.header("예측 집 값: " + strresult)
