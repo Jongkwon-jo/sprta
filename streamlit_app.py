@@ -29,15 +29,15 @@ st.write("""
 4. 건축년도
 """)
 
-width = st.slider("면적을 선택하세요 단위(m^2)", 11, 291)
+width = st.slider("면적을 선택하세요 단위(m^2)", 12, 244)
 # 6. 날짜 입력
 contractdate = st.date_input('계약년월')  # 디폴트로 오늘 날짜가 찍혀 있다.
 contractString = contractdate.strftime("%Y%m")
 contract = float(contractString)
 st.write(contractdate.strftime("%Y%m"))
 
-floor = st.slider("층을 선택하세요", 1, 60)
-builtYear = st.slider("건축년도를 선택하세요(년도)", 1971, 2022)
+floor = st.slider("층을 선택하세요", 1, 40)
+builtYear = st.slider("건축년도를 선택하세요(년도)", 1968, 2023)
 
 # scaling되기 전의 데이터
 realData = [[width, contract, floor, builtYear]]
